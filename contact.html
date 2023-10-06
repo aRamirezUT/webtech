@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title id="page-title">CS 4413 Lab 3 - Contact</title>
+    <link href="mystyle.css"
+        type="text/css"
+        rel="stylesheet">
+</head>
+<body>
+    <h1 id="contact-heading">Music Information Contact Form</h1>
+    <form id="contact-form" action="./save_contact.php" method="GET">
+        <table id="contact-table" class="bordered-table">
+            <tr>
+                <th id="email-label"><label for="email">Email:</label></th>
+                <th id="email-input"><input type="email" id="email" name="email" required></th>
+            </tr>
+            <tr>
+                <th id="device-label">What device do you listen to music on?</th>
+                <th id="device-options">
+                    <select id="devices" name="devices">
+                        <option id="ipod-option" value="iPod" selected="selected">iPod</option>
+                        <option id="radio-option" value="Radio">Radio</option>
+                        <option id="phone-option" value="Phone">Phone</option>
+                        <option id="computer-option" value="Computer">Computer</option>
+                    </select>
+                </th>
+            </tr>
+            <tr>
+                <th id="genre-label">Please select your favorite genre:</th>
+                <th id="genre-options">
+                    <input type="radio" id="rock-radio" name="genre" value="rock" checked="checked" /> Rock
+                    <input type="radio" id="indie-radio" name="genre" value="indie" /> Indie
+                    <input type="radio" id="metal-radio" name="genre" value="metal" /> Metal
+                    <input type="radio" id="grunge-radio" name="genre" value="grunge" /> Grunge
+                </th>
+            </tr>
+            <tr>
+                <th id="service-label">Your Favorite music service:</th>
+                <th id="service-options">
+                    <input type="checkbox" id="itunes-checkbox" name="service" value="iTunes" checked="checked" /> iTunes
+                    <input type="checkbox" id="spotify-checkbox" name="service" value="Spotify" checked="checked" /> Spotify
+                    <input type="checkbox" id="pandora-checkbox" name="service" value="Pandora" checked="checked" /> Pandora
+                </th>
+            </tr>
+        </table>
+        <input type="submit" id="submit-button" value="Submit">
+    </form>
+</body>
+</html>
