@@ -8,33 +8,32 @@ function getDataFromForm() {
 
 function runAjax(fname, lname) {
   // Create a new XMLHttpRequest object
-  const xhr = new XMLHttpRequest();
+  const xhttp = new XMLHttpRequest();
 
   // Define the URL and request method
-  const url = "https://web-app-sql.azurewebsites.net/Lab8/ajax.php";
-  const method = "GET";
-
-  // Construct the request URL with first name and last name as query parameters
-  const requestUrl = `${url}?firstName=${fname}&lastName=${lname}`;
+  const url = "./ajax.php";
+  const params = `firstName=${fname}&lastName=${lname}`;
 
   // Configure the request
-  xhr.open(method, requestUrl, true);
+  xhttp.open("GET", `${url}?${params}`, true);
 
   // Define the callback function to handle the response
-  xhr.onload = function() {
-      if (xhr.status === 200) {
-          // Check if the response is a string
-          if (typeof xhr.responseText === "string") {
-              // Update the content of the paragraph element with the response
-              document.getElementById("responseString").textContent = xhr.responseText;
-          }
-      } else {
-          console.error("Request failed with status:", xhr.status);
-      }
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState === 4) {
+        if (xhttp.status === 200) {
+            // Check if the response is a string
+            if (typeof xhttp.responseText === "string") {
+                // Update the content of the paragraph element with the response
+                document.getElementById("responseString").textContent = xhttp.responseText;
+            }
+        } else {
+            console.error("Request failed with status:", xhttp.status);
+        }
+    }
   };
 
   // Send the AJAX request
-  xhr.send();
+  xhttp.send();
 }
 
 // Attach the button click event listener
