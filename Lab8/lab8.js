@@ -6,7 +6,7 @@ function getDataFromForm() {
 
   // Call runAjax with first name and last name as arguments
   runAjax(firstName, lastName);
-  alert("it worked!");
+  // alert("it worked!");
 }
 
 function runAjax(fname, lname) {
