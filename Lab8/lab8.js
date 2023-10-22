@@ -1,7 +1,7 @@
 function getDataFromForm() {
   // Get the first name and last name from the input elements in the form
-  const firstName = document.querySelector('input[name="fname"]').value;
-  const lastName = document.querySelector('input[name="lname"]').value;
+  const firstName = document.getElementById("fname").value;
+  const lastName = document.getElementById("lname").value;
 
   runAjax(firstName, lastName);
 }
