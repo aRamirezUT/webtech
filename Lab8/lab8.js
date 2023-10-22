@@ -37,4 +37,4 @@ function runAjax(fname, lname) {
 }
 
 // Attach the button click event listener
-// document.getElementById("ajaxCall").addEventListener("click", getDataFromForm);
+document.getElementById("ajaxCall").addEventListener("click", getDataFromForm);
