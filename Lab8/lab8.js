@@ -17,6 +17,8 @@ const method = "GET";
 // Create a new XMLHttpRequest object
 const xhr = new XMLHttpRequest();
 
+console.log("Request URL:", url);
+
 // Configure the request
 xhr.open(method, url, true);
 
@@ -25,6 +27,7 @@ xhr.onload = function() {
     if (xhr.status === 200) {
         if (typeof xhr.responseText === "string") {
             // Update the content of the paragraph element with the response
+            console.log("Response:", xhr.responseText);
             document.getElementById("responseString").textContent = xhr.responseText;
         }
     } else {
