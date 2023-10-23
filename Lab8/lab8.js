@@ -2,7 +2,9 @@ function getDataFromForm() {
   // Get the first name and last name from the input elements in the form
   var firstName = document.querySelector('input[name="fname"]').value;
   var lastName = document.querySelector('input[name="lname"]').value;
-
+  
+  console.log("First Name:", firstName);
+  console.log("Last Name:", lastName);
   runAjax(firstName, lastName);
 }
 
@@ -37,4 +39,4 @@ function runAjax(fname, lname) {
 }
 
 // Attach the button click event listener
-document.getElementById("ajaxCall").addEventListener("click", getDataFromForm);
+// document.getElementById("ajaxCall").addEventListener("click", getDataFromForm);
