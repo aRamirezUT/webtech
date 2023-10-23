@@ -1,7 +1,7 @@
 function getDataFromForm() {
   // Get the first name and last name from the input elements in the form
-  var firstName = document.querySelector('input[name="fname"]').value;
-  var lastName = document.querySelector('input[name="lname"]').value;
+  let firstName = document.querySelector('input[name="fname"]').value;
+  let lastName = document.querySelector('input[name="lname"]').value;
   
   console.log("First Name:", firstName);
   console.log("Last Name:", lastName);
@@ -9,12 +9,13 @@ function getDataFromForm() {
 }
 
 function runAjax(fname, lname) {
-// Create a new XMLHttpRequest object
-const xhr = new XMLHttpRequest();
-
+  console.log("runAjax called with FirstName:", fname, "LastName:", lname);
 // Define the URL and request method
 const url = `./ajax.php?firstName=${fname}&lastName=${lname}`;
 const method = "GET";
+
+// Create a new XMLHttpRequest object
+const xhr = new XMLHttpRequest();
 
 // Configure the request
 xhr.open(method, url, true);
