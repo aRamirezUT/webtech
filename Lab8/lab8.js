@@ -13,7 +13,7 @@ function runAjax(fname, lname) {
 const xhr = new XMLHttpRequest();
 
 // xhr request
-xhr.open("GET", `./ajax.php?firstName=${firstName}&lastName=${lastName}`, true);
+xhr.open("GET", `./ajax.php?fname=${fname}&lname=${lname}`, true);
 
 //callback function to handle the response
 xhr.onload = function() {
