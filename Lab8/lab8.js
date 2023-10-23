@@ -28,7 +28,7 @@ xhr.onload = function() {
         if (typeof xhr.responseText === "string") {
             // Update the content of the paragraph element with the response
             console.log("Response:", xhr.responseText);
-            document.getElementById("responseString").textContent = xhr.responseText;
+            document.getElementById("responseString").textContent = xhr.responseText + " " + fname + " " + lname;
         }
     } else {
         console.error("Request failed with status:", xhr.status);
