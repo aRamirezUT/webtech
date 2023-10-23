@@ -1,33 +1,25 @@
 function getDataFromForm() {
-  // Get the first name and last name from the input elements in the form
+  // Get fname and lname from the input elements in index.html
   let firstName = document.querySelector('input[name="fname"]').value;
   let lastName = document.querySelector('input[name="lname"]').value;
-  
-  console.log("First Name:", firstName);
-  console.log("Last Name:", lastName);
+
   runAjax(firstName, lastName);
 }
 
 function runAjax(fname, lname) {
   console.log("runAjax called with FirstName:", fname, "LastName:", lname);
-// Define the URL and request method
-const url = `./ajax.php?fname=${fname}&lname=${lname}`;
-const method = "GET";
 
-// Create a new XMLHttpRequest object
+// new XMLHttpRequest object
 const xhr = new XMLHttpRequest();
 
-console.log("Request URL:", url);
+// xhr request
+xhr.open("GET", `./ajax.php?firstName=${firstName}&lastName=${lastName}`, true);
 
-// Configure the request
-xhr.open(method, url, true);
-
-// Define the callback function to handle the response
+//callback function to handle the response
 xhr.onload = function() {
     if (xhr.status === 200) {
         if (typeof xhr.responseText === "string") {
-            // Update the content of the paragraph element with the response
-            console.log("Response:", xhr.responseText);
+            // Update the content paragraph element with the response
             document.getElementById("responseString").textContent = xhr.responseText + " " + fname + " " + lname;
         }
     } else {
@@ -35,9 +27,6 @@ xhr.onload = function() {
     }
 };
 
-// Send the AJAX request
+//send ajax request
 xhr.send();
 }
-
-// Attach the button click event listener
-// document.getElementById("ajaxCall").addEventListener("click", getDataFromForm);
