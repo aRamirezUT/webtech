@@ -11,7 +11,7 @@ function getDataFromForm() {
 function runAjax(fname, lname) {
   console.log("runAjax called with FirstName:", fname, "LastName:", lname);
 // Define the URL and request method
-const url = `./ajax.php?firstName=${fname}&lastName=${lname}`;
+const url = `./ajax.php?fname=${fname}&lname=${lname}`;
 const method = "GET";
 
 // Create a new XMLHttpRequest object
