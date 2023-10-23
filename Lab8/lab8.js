@@ -9,33 +9,30 @@ function getDataFromForm() {
 }
 
 function runAjax(fname, lname) {
-  // Create a new XMLHttpRequest object
-  const xhttp = new XMLHttpRequest();
+// Create a new XMLHttpRequest object
+const xhr = new XMLHttpRequest();
 
-  // Define the URL and request method
-  const url = "./ajax.php";
-  const params = `firstName=${fname}&lastName=${lname}`;
+// Define the URL and request method
+const url = `./ajax.php?firstName=${fname}&lastName=${lname}`;
+const method = "GET";
 
-  // Configure the request
-  xhttp.open("GET", `${url}?${params}`, true);
+// Configure the request
+xhr.open(method, url, true);
 
-  // Define the callback function to handle the response
-  xhttp.onreadystatechange = function() {
-    if (xhttp.readyState === 4) {
-        if (xhttp.status === 200) {
-            // Check if the response is a string
-            if (typeof xhttp.responseText === "string") {
-                // Update the content of the paragraph element with the response
-                document.getElementById("responseString").textContent = xhttp.responseText;
-            }
-        } else {
-            console.error("Request failed with status:", xhttp.status);
+// Define the callback function to handle the response
+xhr.onload = function() {
+    if (xhr.status === 200) {
+        if (typeof xhr.responseText === "string") {
+            // Update the content of the paragraph element with the response
+            document.getElementById("responseString").textContent = xhr.responseText;
         }
+    } else {
+        console.error("Request failed with status:", xhr.status);
     }
-  };
+};
 
-  // Send the AJAX request
-  xhttp.send();
+// Send the AJAX request
+xhr.send();
 }
 
 // Attach the button click event listener
