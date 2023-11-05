@@ -1,36 +1,32 @@
 <?php
-require 'vendor/autoload.php'; // Include the Composer-generated autoload file
+require_once 'vendor/autoload.php'; // Include the Azure SDK for PHP
 
-use Azure\Core\AzureKeyCredential;
-use Azure\Storage\Blobs\BlobServiceClient;
+use WindowsAzure\Common\ServicesBuilder;
+use MicrosoftAzure\Storage\Common\ServiceException;
 
-function listBlobs($accountName, $containerName) {
-    // Construct the connection string from the arguments.
-    $connectionString = "DefaultEndpointsProtocol=https;AccountName={$accountName};AccountKey=XDhJYZCbxoXpNa1cpVVMdYEDOpt/LDnLri0bnm15SyuPawCQMvIT7u7rNvaXaqUcSEA5+1/m2x0k+AStC2yWxQ==;EndpointSuffix=core.windows.net";
+// Define your Azure Blob Storage connection string
+$connectionString = "DefaultEndpointsProtocol=https;AccountName=webappstorage4413;AccountKey=XDhJYZCbxoXpNa1cpVVMdYEDOpt/LDnLri0bnm15SyuPawCQMvIT7u7rNvaXaqUcSEA5+1/m2x0k+AStC2yWxQ==;EndpointSuffix=core.windows.net";
 
-    // Create a BlobServiceClient using the connection string.
-    $blobServiceClient = new BlobServiceClient($connectionString);
+// Create a blob service client
+$blobRestProxy = ServicesBuilder::getInstance()->createBlobService($connectionString);
 
-    // Get the container client.
-    $containerClient = $blobServiceClient->getContainerClient($containerName);
-
-    // List blobs in the container.
-    $blobs = $containerClient->listBlobs();
-
-    return $blobs;
-}
-
-// Define your Azure Blob Storage configuration
-$accountName = 'webappstorage4413';
+// Define your container name
 $containerName = 'webappstorage';
 
-// Get the list of blobs
-$blobs = listBlobs($accountName, $containerName);
+try {
+    // List the blobs in the container
+    $blob_list = $blobRestProxy->listBlobs($containerName);
+    $blobs = $blob_list->getBlobs();
 
-// Display the data in an HTML table
-echo '<table>';
-foreach ($blobs as $blob) {
-    $blobContents = $blob->getContent();
-    echo '<tr><td>' . $blobContents . '</td></tr>';
+    echo '<table>';
+    foreach ($blobs as $blob) {
+        echo '<tr><td>' . $blob->getName() . '</td></tr>';
+    }
+    echo '</table>';
+} catch (ServiceException $e) {
+    // Handle exception based on error codes and messages
+    $code = $e->getCode();
+    $error_message = $e->getMessage();
+    echo $code . ": " . $error_message . "<br />";
 }
-echo '</table>';
+?>

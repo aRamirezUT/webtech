@@ -1,45 +1,36 @@
 <?php
-require 'vendor/autoload.php'; // Include the Composer-generated autoload file
+require_once 'vendor/autoload.php'; // Include the Azure SDK for PHP
 
-use Azure\Core\AzureKeyCredential;
-use Azure\Storage\Blobs\BlobServiceClient;
+use WindowsAzure\Common\ServicesBuilder;
+use MicrosoftAzure\Storage\Common\ServiceException;
 
-function uploadBlob($accountName, $containerName, $blobName, $blobContents) {
-    // Construct the connection string from the arguments.
-    $connectionString = "DefaultEndpointsProtocol=https;AccountName={$accountName};AccountKey=XDhJYZCbxoXpNa1cpVVMdYEDOpt/LDnLri0bnm15SyuPawCQMvIT7u7rNvaXaqUcSEA5+1/m2x0k+AStC2yWxQ==;EndpointSuffix=core.windows.net";
+// Define your Azure Blob Storage connection string
+$connectionString = "DefaultEndpointsProtocol=https;AccountName=webappstorage4413;AccountKey=XDhJYZCbxoXpNa1cpVVMdYEDOpt/LDnLri0bnm15SyuPawCQMvIT7u7rNvaXaqUcSEA5+1/m2x0k+AStC2yWxQ==;EndpointSuffix=core.windows.net";
 
-    // Create a BlobServiceClient using the connection string.
-    $blobServiceClient = new BlobServiceClient($connectionString);
-
-    // Get the container client.
-    $containerClient = $blobServiceClient->getContainerClient($containerName);
-
-    try {
-        // Create the container if it does not exist.
-        $containerClient->create();
-
-        // Upload text to a new block blob.
-        $blobClient = $containerClient->getBlobClient($blobName);
-        $blobClient->upload($blobContents, strlen($blobContents));
-    } catch (Exception $e) {
-        throw $e;
-    }
-}
+// Create a blob service client
+$blobRestProxy = ServicesBuilder::getInstance()->createBlobService($connectionString);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $firstName = $_POST['first_name'];
-    $lastName = $_POST['last_name'];
-    $data = $firstName . ' ' . $lastName;
+    // Retrieve data from the form
+    $data = $_POST['data']; // Assuming you have a form field named 'data'
 
-    // Define your Azure Blob Storage configuration
-    $accountName = 'webappstorage4413';
+    // Define your container name
     $containerName = 'webappstorage';
-    $blobName = uniqid() . '.txt';
 
-    // Upload the data to Azure Blob Storage
-    uploadBlob($accountName, $containerName, $blobName, $data);
+    try {
+        // Upload the data as a blob
+        $blobRestProxy->createBlockBlob($containerName, uniqid() . '.txt', $data);
 
-    header('Location: index.html');
+        // Redirect to show_data.php after successful save
+        header('Location: show_data.php');
+        exit();
+    } catch (ServiceException $e) {
+        // Handle exception based on error codes and messages
+        $code = $e->getCode();
+        $error_message = $e->getMessage();
+        echo $code . ": " . $error_message . "<br />";
+    }
 } else {
     echo "Invalid request.";
 }
+?>
