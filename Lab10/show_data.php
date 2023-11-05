@@ -16,10 +16,22 @@ $blobName = 'names.txt'; // Specify the name of the blob you want to read
 try {
     // Get the content of the blob
     $blob = $blobClient->getBlob($containerName, $blobName);
+    $content = stream_get_contents($blob->getContentStream());
 
-    // Output the content to the browser
-    header('Content-Type: text/plain'); // Set the content type to plain text
-    echo stream_get_contents($blob->getContentStream());
+    // Split the content into an array based on newline
+    $lines = preg_split("/\r\n|\n|\r/", $content);
+
+    // Display the data in a table
+    echo '<table border="1">';
+    echo '<tr><th>First Name</th><th>Last Name</th></tr>';
+    foreach ($lines as $line) {
+        $names = explode(' ', $line);
+        echo '<tr>';
+        echo '<td>' . $names[0] . '</td>';
+        echo '<td>' . $names[1] . '</td>';
+        echo '</tr>';
+    }
+    echo '</table>';
 } catch (ServiceException $e) {
     $code = $e->getCode();
     $error_message = $e->getMessage();
