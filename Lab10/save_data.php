@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . 'vendor/autoload.php'; // Include the Azure SDK for PHP
+require_once 'vendor/autoload.php'; // Include the Azure SDK for PHP
 
 use MicrosoftAzure\Storage\Common\ServicesBuilder;
 use MicrosoftAzure\Storage\Table\TableRestProxy;
