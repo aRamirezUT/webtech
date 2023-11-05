@@ -27,6 +27,9 @@ try {
     // Handle exception based on error codes and messages
     $code = $e->getCode();
     $error_message = $e->getMessage();
+    error_log("Error in save_data.php: $code - $error_message");
+    // Display the error message on the webpage
+    echo "Error in show_data.php: $code - $error_message";
     echo $code . ": " . $error_message . "<br />";
 }
 ?>

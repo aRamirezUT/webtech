@@ -28,6 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Handle exception based on error codes and messages
         $code = $e->getCode();
         $error_message = $e->getMessage();
+        error_log("Error in save_data.php: $code - $error_message");    
+        // You can also echo the error for debugging purposes
+        echo "Error in save_data.php: $code - $error_message";
         echo $code . ": " . $error_message . "<br />";
     }
 } else {
