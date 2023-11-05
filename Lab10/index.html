@@ -6,13 +6,6 @@
 </head>
 <body>
 
-    <!-- Check if the 'success' query parameter is present and display a message -->
-    <?php
-    if (isset($_GET['success']) && $_GET['success'] == 1) {
-        echo '<p>Data has been saved successfully!</p>';
-    }
-    ?>
-
     <form action="save_data.php" method="post" accept-charset="utf-8">
         <label for="first_name">First Name:</label>
         <input type="text" id="first_name" name="first_name" required><br>
@@ -23,7 +16,7 @@
         <input type="submit" value="Save Data" onclick="updateSavedData()">>
     </form>
     
-    <div id="savedData">Saved data will be displayed here.</div>
-    
+    <p id="savedData">Saved data will be displayed here.</p>
+
 </body>
 </html>
