@@ -27,6 +27,8 @@ try {
         $data = "This is the data to append."; // Your data here
         $blobClient->createBlockBlob($containerName, $blobName, $data);
         echo "Blob created and data appended!";
+        // After successfully appending data to the blob
+        header("Location: index.html?success=1");
     } else {
         // Handle other errors
         echo "Error " . $e->getCode() . ": " . $e->getMessage();
