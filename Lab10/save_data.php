@@ -18,8 +18,9 @@ try {
     $existingBlob = $blobClient->getBlob($containerName, $blobName);
     // Blob exists, append data to it
     $currentContent = stream_get_contents($existingBlob->getContentStream());
-    $newContent = $currentContent . $data;
+    $newContent = $currentContent . "\n" . $data;
     $blobClient->createBlockBlob($containerName, $blobName, $newContent);
+    
     echo "Data appended successfully!";
 } catch (ServiceException $e) {
     if ($e->getCode() == 404) {
