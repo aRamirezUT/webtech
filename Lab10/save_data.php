@@ -15,21 +15,20 @@ $last_name = $_POST['last_name'];
 $data = $first_name . " " . $last_name;
 
 try {
-    // Check if the blob exists
-    if ($blobClient->doesBlobExist($containerName, $blobName)) {
-        // Append data to the existing blob
-        $existingBlob = $blobClient->getBlob($containerName, $blobName);
-        $currentContent = stream_get_contents($existingBlob->getContentStream());
+    // Attempt to get the blob; if it exists, it means the blob exists
+    $existingBlob = $blobClient->getBlob($containerName, $blobName);
+    
+    if ($existingBlob) {
+        // The blob exists, you can perform the append operation here
 
-        $newContent = $currentContent . $dataToAppend;
+        $currentContent = stream_get_contents($existingBlob->getContentStream());
+        $newContent = $currentContent . $data;
 
         $blobClient->createBlockBlob($containerName, $blobName, $newContent);
-
+        
         echo "Data appended successfully!";
     } else {
-        // If the blob does not exist, create it and add data
-        $blobClient->createBlockBlob($containerName, $blobName, $dataToAppend);
-        echo "New blob created with data!";
+        echo "Blob does not exist!";
     }
 } catch (ServiceException $e) {
     $code = $e->getCode();
