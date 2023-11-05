@@ -1,40 +1,36 @@
 <?php
-require_once 'vendor/autoload.php'; // Include the Azure SDK for PHP
-
+require_once 'vendor/autoload.php';
 use MicrosoftAzure\Storage\Common\ServicesBuilder;
-use MicrosoftAzure\Storage\Table\TableRestProxy;
-use MicrosoftAzure\Storage\Common\ServiceException;
 
-// Define your Azure Blob Storage connection string
-$connectionString = "DefaultEndpointsProtocol=https;AccountName=webappstorage4413;AccountKey=XDhJYZCbxoXpNa1cpVVMdYEDOpt/LDnLri0bnm15SyuPawCQMvIT7u7rNvaXaqUcSEA5+1/m2x0k+AStC2yWxQ==;EndpointSuffix=core.windows.net";
+$connectionString = "DefaultEndpointsProtocol=https;AccountName=webappstorage4413;AccountKey=XDhJYZCbxoXpNa1cpVVMdYEDOpt/LDnLri0bnm15SyuPawCQMvIT7u7rNvaXaqUcSEA5+1/m2x0k+AStC2yWxQ==;EndpointSuffix=core.windows.net"; // Replace with your actual connection string
 
-// Create a blob service client
 $blobRestProxy = ServicesBuilder::getInstance()->createBlobService($connectionString);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Retrieve data from the form
-    $data = $_POST['data']; // Assuming you have a form field named 'data'
+$containerName = "webappstorage"; // Replace with your container name
+$blobName = "names.txt"; // Replace with your desired file name
 
-    // Define your container name
-    $containerName = 'webappstorage';
+// Check if the file already exists in the blob
+$blobExists = $blobRestProxy->blobExists($containerName, $blobName);
 
-    try {
-        // Upload the data as a blob
-        $blobRestProxy->createBlockBlob($containerName, uniqid() . '.txt', $data);
+// Retrieve data from the POST request
+$first_name = $_POST['first_name'];
+$last_name = $_POST['last_name'];
+$data = $first_name . " " . $last_name;
 
-        // Redirect to show_data.php after successful save
-        header('Location: show_data.php');
-        exit();
-    } catch (ServiceException $e) {
-        // Handle exception based on error codes and messages
-        $code = $e->getCode();
-        $error_message = $e->getMessage();
-        error_log("Error in save_data.php: $code - $error_message");    
-        // You can also echo the error for debugging purposes
-        echo "Error in save_data.php: $code - $error_message";
-        echo $code . ": " . $error_message . "<br />";
-    }
+if ($blobExists) {
+    // If the blob exists, retrieve its current content
+    $blob = $blobRestProxy->getBlob($containerName, $blobName);
+    $existingData = stream_get_contents($blob->getContentStream());
+
+    // Append the new data to the existing content
+    $dataToAppend = $existingData . "\n" . $data;
 } else {
-    echo "Invalid request.";
+    // If the blob doesn't exist, create a new file with the initial data
+    $dataToAppend = $data;
 }
-?>
+
+// Upload the updated content to the blob
+$blobRestProxy->createBlockBlob($containerName, $blobName, $dataToAppend);
+
+// Redirect the user back to the "index.html" page
+header("Location: index.html");
