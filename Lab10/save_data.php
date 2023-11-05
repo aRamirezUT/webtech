@@ -2,6 +2,7 @@
 require_once 'vendor/autoload.php'; // Include the Azure SDK for PHP
 
 use WindowsAzure\Common\ServicesBuilder;
+use MicrosoftAzure\Storage\Table\TableRestProxy;
 use MicrosoftAzure\Storage\Common\ServiceException;
 
 // Define your Azure Blob Storage connection string
