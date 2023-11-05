@@ -1,5 +1,5 @@
 {
-    "require": {
-      "microsoft/windowsazure": "^0.4"
-    }
+  "require": {
+  "Microsoft/azure-storage-blob":"1.2.0"
   }
+}
