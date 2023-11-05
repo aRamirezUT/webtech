@@ -1,0 +1,96 @@
+p {
+    color: #333;
+    background-color: #bdabab;
+}
+
+/*  index.html css */
+.info-paragraph {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.bordered-table {
+    border: 2px solid #0011ff; /* Border color, style, and width */
+    border-radius: 10px; /* Border radius (rounded corners) */
+}
+
+h1,h2 {
+    color: #544b4b;
+}
+
+body {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+a:link {
+    color: #0000FF; /* Link color */
+    text-decoration: none;
+}
+
+a:hover {
+    color: #FF0000; /* Hover color */
+    text-decoration: underline;
+}
+
+a:visited {
+    color: #800080; /* Visited link color */
+}
+
+/*  me.html css */
+#my-img {
+    width: 500px;
+    height: 550px;
+    opacity: 1.0;
+    border-radius: 5px;
+    float: left;
+    margin: 10px;
+}
+
+/*  contact.html css */
+#contact-form {
+    width: 80%;
+    margin: 0;
+    padding: 20px;
+}
+
+#contact-heading {
+    text-align: center;
+    font-size: 24px;
+    color: #632020;
+    margin-bottom: 20px;
+}
+
+#contact-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#contact-table th {
+    text-align: left;
+    font-weight: bold;
+    padding: 10px;
+    background-color: #95a7c1;
+}
+
+#email {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#devices {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="radio"] {   /* Style radio buttons */
+    margin-right: 5px; /* Add spacing between radio buttons */
+}
+
+input[type="checkbox"] {    /* Style checkboxes */
+    margin-right: 5px; /* Add spacing between checkboxes */
+}
