@@ -6,17 +6,18 @@
 </head>
 <body>
 
-    <form action="save_data.php" method="post" accept-charset="utf-8">
+    <form id="dataForm">
         <label for="first_name">First Name:</label>
         <input type="text" id="first_name" name="first_name" required><br>
         
         <label for="last_name">Last Name:</label>
         <input type="text" id="last_name" name="last_name" required><br>
         
-        <input type="submit" value="Save Data" onclick="updateSavedData()">>
+        <input type="button" value="Save Data" onclick="saveData()">
     </form>
     
-    <p id="savedData"></p>
+    <h2>Saved Data</h2>
+    <div id="savedData"></div>
 
 </body>
 </html>
