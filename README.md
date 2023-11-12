@@ -1,7 +1,7 @@
 ### This is a repository for my Web Technologies Class CS-4413 at UTSA
 ### All links point to lab assignments instructions will be provided below for each lab..
 
-# Lab6 -
+# Lab6
     For this lab you will create an html file named "lab6.html" that links to an external JavaScript file named "lab6.js".  Within the JavaScript file, define and code an object. 
     This object should be much like the object sample in the chapter 3 lecture slides (starting with slide 36). The object should have at least 3 properties and 2 methods. 
     Both methods should produce output using either alert() or document.write(). Once you have written this code, create an instance of your object, set its properties and run its functions.
