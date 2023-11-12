@@ -1,6 +1,6 @@
 <?php
 
-// Function to generate a random value for the cookie (you can customize this)
+// Function to generate a random value for the cookie
 function generateCookieValue() {
     return md5(uniqid(mt_rand(), true));
 }
@@ -16,11 +16,7 @@ if (isset($_COOKIE[$cookieName])) {
     // If not set, create a new value for the cookie
     $cookieValue = generateCookieValue();
 
-    // Set the cookie with an expiration time of 2 minutes
     setcookie($cookieName, $cookieValue, time() + 120, "/");
-
-    // Inform the user that the cookie has been set
+    
     echo "The cookie '$cookieName' has been set with the value: $cookieValue";
 }
-
-?>
