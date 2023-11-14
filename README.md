@@ -1,5 +1,6 @@
 ### This is a repository for my Web Technologies Class CS-4413 at UTSA
-### All links point to lab assignments instructions will be provided below for each lab..
+### All links point to lab assignments instructions will be provided below for each lab.. as well as a link to my azure deployment
+https://web-app-sql.azurewebsites.net/TOC.html
 
 # Lab6
     For this lab you will create an html file named "lab6.html" that links to an external JavaScript file named "lab6.js".  Within the JavaScript file, define and code an object. 
